@@ -1,10 +1,10 @@
 # Projeto Final - Software de Gestão de Prontuário
 
 
-Resumo dos Passos
+Instação do ambiente de desenvolvimento
 
-Clone o repositório do GitHub
+1. Clone o repositório do GitHub
 
-Instale o Composer (se necessário)
+2. Instale o Composer (se necessário)
 
-Instale as dependências do projeto com composer install 
+3. Instale as dependências do projeto com composer install 
