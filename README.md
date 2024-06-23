@@ -1,7 +1,7 @@
 # Projeto Final - Software de Gestão de Prontuário
 
 
-Instação do ambiente de desenvolvimento
+Instalação do ambiente de desenvolvimento
 
 1. Clone o repositório do GitHub
 
