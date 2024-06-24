@@ -13,5 +13,5 @@ Instalação do ambiente de desenvolvimento
 
 5. Faça as alterações necessárias com o banco de dados:
    
-   -Modifique o acesso na classe Connection e o arquivo authenticate.php
+   - Modifique o acesso na classe Connection e o arquivo authenticate.php
    - Crie as tabelas da aplicação
