@@ -14,6 +14,26 @@ require_once 'app/Controller/ErroController.php';
 require_once 'app/Controller/ContatoController.php';
 require_once 'app/Controller/PostController.php';
 
+require_once 'app/Controller/PerfilController.php';
+require_once 'app/Model/Perfil.php';
+
+require_once 'app/Model/Comentario.php';
+
+require_once 'app/Model/Ficha.php';
+require_once 'app/Controller/FichaController.php';
+
+require_once 'app/Controller/SobreController.php';
+
+require_once 'app/Controller/AdminController.php';
+
+
+
+
+
+
+
+
+
 
 
 

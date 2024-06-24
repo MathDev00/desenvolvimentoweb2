@@ -28,9 +28,16 @@ class Core
         else { //sem pagina (?pagina=...!!!
             $controller =  'HomeController';
         }
+
+        if (isset($urlGet['metodo'])){ //pega o metodo
+
+            $acao = $urlGet['metodo'];
+
+
+        } else {
         $acao =  'index';//metodo padrao das classes
 
-
+        }
 
 
         if (!class_exists($controller)){ //Teste lógico para a existência da classe
@@ -39,7 +46,7 @@ class Core
         }
 
    
-        var_dump($urlGet);
+       // var_dump($urlGet);
 
 
         if(isset($urlGet['id']) && $urlGet['id'] != null) {
@@ -57,7 +64,7 @@ class Core
 
         call_user_func_array(array(new $controller, $acao), array($id));//Usar métodos de classe!!!
 
-        echo $controller;
+       // echo $controller;
 
 
     }

@@ -2,63 +2,84 @@
 
 
 /*
-Padrao singleton 
-
 
 Modelagem do banco de dados. Funções para conexão com a tabela.
 Retorno dos dados. 
 
 */
-    class Postagem 
+    class Perfil 
     {
+
         public static function selecionaTodos()
+        
         {
+
           //Conexao com banco de dados
+
           $conn =  Connection::getConn();  
 
-          $sql = "SELECT * FROM postagem ORDER BY ID DESC";
+          $sql = "SELECT * FROM perfil ORDER BY id ASC";
           $sql = $conn->prepare($sql);
           $sql->execute();
 
           $resultado = array();
+
+
           /* Retorno por meio de $row (objeto) é armazenado em resultado. 
           Retorno da consulta acima */
-          while ($row = $sql->fetchObject('Postagem')) {
+
+          while ($row = $sql->fetchObject('Perfil')) {
+
             $resultado []  = $row; //$row->titulo, $row->conteudo
+
           }
+
           /* Array vazio!!! */ 
+
           if (!$resultado)  {
+
             throw  new Exception("Não foi encontrado nenhum registro");
+
           }
+
+
           return $resultado;
+
+
         }
 
         public static function selecionaPorId($idPost){
 
           $conn =  Connection::getConn();  
-          $sql = "SELECT  * FROM postagem WHERE id = :id";
+          $sql = "SELECT  * FROM perfil WHERE id = :id";
           $sql = $conn->prepare($sql);
           $sql->bindValue(':id', $idPost, PDO::PARAM_INT);
           $sql->execute();
 
-          $resultado = $sql->fetchObject('Postagem');
+          $resultado = $sql->fetchObject('Perfil');
 
           if (!$resultado)  {
             throw  new Exception("Não foi encontrado nenhum registro");
           } else {
 
-            $resultado->comentarios = Comentario::selecionarComentarios($resultado->id);
+            $resultado->fichas = Ficha::selecionarFicha($resultado->id);
 
+              if (!$resultado->fichas){ //se vazio
+
+                $resultado->fichas = "Não existe nenhum comentario para essa postagem";
+
+              }
 
           }
           return $resultado; 
         }
 
+
         public static function insert($dadosPost)
         
         {
 
-          if (empty($dadosPost['titulo']) ||empty($dadosPost['conteudo']) ) {
+          if (empty($dadosPost['nome']) || empty($dadosPost['ocupacao']) ||empty($dadosPost['idade']) ) {
             throw new Exception("Preencha os campos!", 1);
 
             return false;
@@ -68,10 +89,12 @@ Retorno dos dados.
           $con = Connection::getConn();  
 
 
-          $sql = $con->prepare('INSERT INTO postagem (titulo, conteudo) VALUES (:tit, :cont)'); 
+          $sql = $con->prepare('INSERT INTO perfil (nome, ocupacao, idade) VALUES (:nome, :ocupacao, :idade)'); 
 
-          $sql->bindValue(':tit', $dadosPost['titulo']);    
-          $sql->bindValue(':cont', $dadosPost['conteudo']);    
+          $sql->bindValue(':nome', $dadosPost['nome']);    
+          $sql->bindValue(':ocupacao', $dadosPost['ocupacao']);    
+          $sql->bindValue(':idade', $dadosPost['idade']);    
+
           $res = $sql->execute();
 
           if ($res == 0) {
