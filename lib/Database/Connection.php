@@ -9,7 +9,7 @@
 
             if(self::$conn == null){
 
-            self::$conn = new PDO('mysql: host=localhost; dbname=serie-criando-site;', 'username','123456789');
+            self::$conn = new PDO('mysql: host=localhost; dbname=BD_1B_1;', 'username','123456789');
 
             }
 

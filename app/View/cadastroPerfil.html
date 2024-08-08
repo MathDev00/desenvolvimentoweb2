@@ -13,6 +13,23 @@
     <label for="exampleFormControlInput1" class="form-label">Nome</label>
     <input class="form-control" name="nome">
   </div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">CPF</label>
+    <input type ="number "class="form-control" name="cpf">
+  </div>
+
+  <br>
+
+  <div class="row mb-3">
+    <label for="txtDataNascimento" class="col-sm-2 col-form-label">Data de nascimento</label>
+    <div class="col-sm-10">
+        <input  type="date" name="data_nascimento" data-mask="00/00/0000" class="form-control" />
+    </div>
+</div>
+
+<br>
+
   
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Idade</label>
@@ -24,6 +41,30 @@
     <option value="Médico">Médico</option>
     <option value="Paciente">Paciente</option>
   </select>
+
+  <br>
+
+
+  <span>Genero</span><br>
+  <select class="form-select" aria-label="Default select example" name = "genero">
+    <option value="Médico">Feminino</option>
+    <option value="Paciente">Masculino</option>
+  </select>
+
+  <br>
+
+
+  <div class="row mb-3">
+    <label for="txtEmail" class="col-sm-2 col-form-label">E-mail</label>
+    <div class="col-sm-10">
+        <input type="email" name="email" class="form-control" placeholder="E-mail" />
+    </div>
+</div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Endereço</label>
+    <input class="form-control" name="endereco">
+  </div>
 
 
   <input type="submit" value="Cadastrar">

@@ -61,45 +61,58 @@
 </style>
 
 <div class="container">
+  <div class="title-icon">
+    <i class="bi bi-calendar"></i>
+  </div>
+  <h2>Agendamento</h2>
 
-<br>
-<h1 class="text-center mb-3" >Criar ficha</h1>
+  <div class="text-center mb-3">
+    <a class="btn btn-dark" href="?pagina=agendamento" role="button"><i class="bi bi-arrow-return-left"></i> </a>
+  </div>
 
-<br>
+  <div class="form-container">
+    <form method="post" action="?pagina=agendamento&metodo=insert">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+        <input class="form-control" name="titulo">
+      </div>
 
-<form method="post" action="?pagina=ficha&metodo=insert">
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <label for="txtDataNascimento" class="col-form-label">Data inicio</label>
+          <input type="datetime-local" name="data_inicio" data-mask="dd/MM/yyyy" class="form-control">
+        </div>
+        <div class="col-sm-6">
+          <label for="txtDataNascimento" class="col-form-label">Data final</label>
+          <input type="datetime-local" name="data_final" data-mask="dd/MM/yyyy HH:mm:ss" class="form-control">
+        </div>
+      </div>
 
+      <div class="mb-3">
+        <label for="cidade" class="form-label">Profissional</label>
+        <select class="form-select" aria-label="Default select example" name="funcionario_id">
+          {% for funcionario in funcionarios %}
+          <option value="{{funcionario.id}}">{{funcionario.usuarios_nome}}</option>
+          {% endfor %}
+        </select>
+      </div>
 
+      <div class="mb-3">
+        <label for="cidade" class="form-label">Paciente</label>
+        <select class="form-select" aria-label="Default select example" name="paciente_id">
+          {% for paciente in pacientes %}
+          <option value="{{paciente.id}}">{{paciente.usuarios_nome}}</option>
+          {% endfor %}
+        </select>
+      </div>
 
-<div class="mb-3">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Responsavel pelo agendamento</label>
+        <input class="form-control" name="responsavel_agendamento">
+      </div>
 
-  <span>Agendamento</span><br>
-  <select class="form-select" aria-label="Default select example" name = "agendamento_id">
-    {% for agendamento in agendamentos %}
-    <option value="{{agendamento.id}}">{{agendamento.titulo}}</option>
-    {% endfor %}
-  </select>
-
-  <span>Funcionario</span><br>
-  <select class="form-select" aria-label="Default select example" name = "funcionario_id">
-    {% for funcionario in funcionarios %}
-    <option value="{{funcionario.id}}">{{funcionario.usuarios_nome}}</option>
-    {% endfor %}
-  </select>
-
-  <span>Paciente</span><br>
-  <select class="form-select" aria-label="Default select example" name = "paciente_id">
-    {% for paciente in pacientes %}
-    <option value="{{paciente.id}}">{{paciente.usuarios_nome}}</option>
-    {% endfor %}
-  </select>
-
-  <span>Conteúdo</span><br>
-  <textarea name="conteudo" cols="50" rows="15"></textarea><br><br>
-
-
-  <input type="submit"  class="btn btn-dark" value="Cadastrar">
-</form>
-
+      <input type="submit" value="Cadastrar" class="btn btn-dark">
+      <br>
+    </form>
+  </div>
 </div>
-

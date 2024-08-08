@@ -2,39 +2,37 @@
 
  /*Interface entre View e Model */
 
-    class FichaController
+    class PacienteController
     {
 
-        public function index($params)
-        {   
+        public function index()
+        {
 
             //Teste da query, caso nao...
             try {
-            
 
-            $ficha = Ficha::selecionarFicha($params);
-            //var_dump($ficha);
+            $colecPerfil = Paciente::selecionaTodos();
    
             $loader = new \Twig\Loader\FilesystemLoader('app/View'); //carrega pasta da view
             $twig = new \Twig\Environment($loader);
 
-            $template = $twig->load('singleFicha.html'); // carrega arquivo a ser usado como view
+            $template = $twig->load('listaPaciente.html'); // carrega arquivo a ser usado como view
 
             $parametros = array();
-            $parametros['ficha'] = $ficha;
 
+            $parametros['pacientes'] = $colecPerfil;
+            //var_dump($colecPerfil);
             //$parametros['nome'] = 'Rafael'; //passando valores para a view 
 
             $conteudo = $template->render($parametros); //armazena o cod html da pagina e passa os valores 
             echo $conteudo;
 
-            //var_dump($colecficha = ficha::selecionaTodos());
+            //var_dump($colecperfil = perfil::selecionaTodos());
 
             } catch(Exception $e) {
 
                 echo $e->getMessage();
-            }        
-        }
+            }        }
 
 
             public function create() {
@@ -42,18 +40,14 @@
             $loader = new \Twig\Loader\FilesystemLoader('app/View'); //carrega pasta da view
             $twig = new \Twig\Environment($loader);
 
-            $template = $twig->load('cadastroFicha.html'); // carrega arquivo a ser usado como view
+            $template = $twig->load('cadastroPaciente.html'); // carrega arquivo a ser usado como view
     
             $parametros = array();
 
-            $colecAgendamento = Agendamento::selecionaTodos();
-            $colecPaciente = Paciente::selecionaTodos();
-            $colecFuncionario = Funcionario::selecionaTodos();
-
-            $parametros['agendamentos'] = $colecAgendamento;
-            $parametros['pacientes'] = $colecPaciente;
-            $parametros['funcionarios'] = $colecFuncionario;
-
+            $colecOcupacao = Ocupacao::selecionaTodos();
+            $colecCidade = Cidade::selecionaTodos();
+            $parametros['ocupacoes'] = $colecOcupacao;
+            $parametros['cidades'] = $colecCidade;
     
     
             $conteudo = $template->render($parametros); //armazena o cod html da pagina e passa os valores 
@@ -65,8 +59,8 @@
 
                 try {    
                     
-                    var_dump($_POST);        
-                    Ficha::insert($_POST);
+                    //var_dump($_perfil);        
+                    Paciente::insert($_POST);
 
     
                echo '<script>alert("Publicação inserida com sucesso!");</script>';
@@ -75,8 +69,10 @@
                 } catch (Exception $e) {
     
                     echo '<script>alert("'.$e->getMessage().'");</script>';
-                   echo '<script>location.href="?pagina=Paciente&metodo=create"</script>';
+                    echo '<script>location.href="?pagina=Paciente&metodo=create"</script>';
                 }
+    
+    
     
             
             }
@@ -89,30 +85,33 @@
         $twig = new \Twig\Environment($loader);
 
     // Buscar todas as ocupações e cidades
-        $colecPaciente = Paciente::selecionaTodos();
-        $colecFuncionario = Funcionario::selecionaTodos();
-        $colecAgendamento = Agendamento::selecionaTodos();
-
+       $colecOcupacao = Ocupacao::selecionaTodos();
+       $colecCidade = Cidade::selecionaTodos();
 
     // Buscar o paciente pelo ID
-       $ficha = Ficha::selecionaPorId($paramId);
-       //var_dump($ficha);
+       $paciente = Paciente::selecionaPorId($paramId);
 
     // Preparar parâmetros para o template
     $parametros = [
-        'pacientes' => $colecPaciente,
-        'funcionarios' => $colecFuncionario,
-        'agendamentos' => $colecAgendamento,
-        'id' => $ficha->id,
-        'agendamento_id' => $ficha->agendamento_id,
-        'funcionario_id' => $ficha->funcionario_id,
-        'paciente_id' => $ficha->paciente_id,
-        'conteudo' => $ficha->conteudo
+        'ocupacoes' => $colecOcupacao,
+        'cidades' => $colecCidade,
+        'id' => $paciente->usuarios_id,
+        'nome' => $paciente->usuarios_nome,
+        'cpf' => $paciente->usuarios_cpf,
+        'data_nascimento' => $paciente->data_nascimento,
+        'genero_nome' => $paciente->genero,
+        'email' => $paciente->email,
+        'endereco_nome' => $paciente->enderecos_nome,
+        'endereco_numero' => $paciente->enderecos_numero,
+        'enderecos_complemento' => $paciente->enderecos_complemento,
+        'enderecos_padrao' => $paciente->enderecos_padrao,
+        'endereco_bairro' => $paciente->endereco_bairro,
+        'endereco_cep' => $paciente->endereco_cep,
+        'cidade_id' => $paciente->cidades_id,
     ];
-    
-    //var_dump( $ficha->conteudo);
+
     // Carregar e renderizar o template
-    $template = $twig->load('updateSingleFicha.html');
+    $template = $twig->load('updatePaciente.html');
     $conteudo = $template->render($parametros);
     echo $conteudo;
 }
@@ -122,7 +121,7 @@
 			try {
                 var_dump($_POST);
 
-				Ficha::update($_POST);
+				Paciente::update($_POST);
 				echo '<script> alert("Publicação alterada com sucesso");</script>';
 				echo '<script> location.href="?pagina=paciente"</script>';
 			} catch (Exception $e) {
@@ -137,7 +136,7 @@
         public function delete($paramId)
 		{
 			try {
-				Ficha::delete($paramId);
+				Paciente::delete($paramId);
 
 				echo '<script>alert("Publicação deletada com sucesso!");</script>';
 				echo '<script>location.href="?pagina=paciente&metodo=index"</script>';

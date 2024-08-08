@@ -19,12 +19,7 @@ class Core
         // Sempre cair em controler (classe)
         }
 
-        elseif ($urlGet['pagina'] == 'Contato') {
-
-        $controller = ucfirst($urlGet['pagina']. 'Controller'); 
-
-
-        }
+      
         else { //sem pagina (?pagina=...!!!
             $controller =  'HomeController';
         }

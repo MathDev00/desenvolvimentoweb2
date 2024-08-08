@@ -67,35 +67,47 @@
 
 <br>
 
-<form method="post" action="?pagina=ficha&metodo=insert">
-
-
+<form method="post" action="?pagina=ficha&metodo=update">
 
 <div class="mb-3">
 
-  <span>Agendamento</span><br>
-  <select class="form-select" aria-label="Default select example" name = "agendamento_id">
-    {% for agendamento in agendamentos %}
-    <option value="{{agendamento.id}}">{{agendamento.titulo}}</option>
-    {% endfor %}
-  </select>
+    <div class="mb-3">
+    
+        <label for="exampleFormControlInput1" class="form-label">Id</label>
+        <input class="form-control" value = "{{id}}" name="id" readonly />
+      </div>
+      <div class="mb-3">
 
-  <span>Funcionario</span><br>
-  <select class="form-select" aria-label="Default select example" name = "funcionario_id">
-    {% for funcionario in funcionarios %}
-    <option value="{{funcionario.id}}">{{funcionario.usuarios_nome}}</option>
-    {% endfor %}
-  </select>
+    <span>Agendamento</span><br>
+    <select class="form-select" aria-label="Default select example" name="agendamento_id">
+      {% for agendamento in agendamentos %}
+        <option value="{{ agendamento.id }}" {% if agendamento.id == agendamento_id %}selected{% endif %}>
+          {{ agendamento.titulo }}
+        </option>
+      {% endfor %}
+    </select>
+  
+    <span>Funcionario</span><br>
+    <select class="form-select" aria-label="Default select example" name="funcionario_id">
+      {% for funcionario in funcionarios %}
+        <option value="{{ funcionario.id }}" {% if funcionario.id == funcionario_id %}selected{% endif %}>
+          {{ funcionario.usuarios_nome }}
+        </option>
+      {% endfor %}
+    </select>
+  
+    <span>Paciente</span><br>
+    <select class="form-select" aria-label="Default select example" name="paciente_id">
+      {% for paciente in pacientes %}
+        <option value="{{ paciente.id }}" {% if paciente.id == paciente_id %}selected{% endif %}>
+          {{ paciente.usuarios_nome }}
+        </option>
+      {% endfor %}
+    </select>
 
-  <span>Paciente</span><br>
-  <select class="form-select" aria-label="Default select example" name = "paciente_id">
-    {% for paciente in pacientes %}
-    <option value="{{paciente.id}}">{{paciente.usuarios_nome}}</option>
-    {% endfor %}
-  </select>
 
   <span>Conteúdo</span><br>
-  <textarea name="conteudo" cols="50" rows="15"></textarea><br><br>
+  <textarea name="conteudo" value="oi" cols="50" rows="15"> {{conteudo}}</textarea><br><br>
 
 
   <input type="submit"  class="btn btn-dark" value="Cadastrar">

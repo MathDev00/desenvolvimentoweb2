@@ -1,6 +1,6 @@
 <?php
 // Conexão com o banco de dados
-$pdo = new PDO('mysql: host=localhost; dbname=serie-criando-site;', 'username','123456789');
+$pdo = new PDO('mysql: host=localhost; dbname=BD_1B_1;', 'username','123456789');
 
 // Coletar dados do formulário
 $username = $_POST['username'];
@@ -10,13 +10,13 @@ $password = $_POST['password'];
 
 
 // Verificar se o usuário existe
-$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuarios_nome = ?");
 $stmt->execute([$username]);
 $user = $stmt->fetch();
 var_dump($password);
-var_dump($user['password']);
+var_dump($user['pass']);
 
-$hash = password_hash($user['password'], PASSWORD_DEFAULT);
+$hash = password_hash($user['pass'], PASSWORD_DEFAULT);
 
 
 if ($user && password_verify($password, $hash)) {

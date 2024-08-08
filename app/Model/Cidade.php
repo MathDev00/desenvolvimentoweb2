@@ -1,13 +1,8 @@
 <?php
 
 
-/*
 
-Modelagem do banco de dados. Funções para conexão com a tabela.
-Retorno dos dados. 
-
-*/
-    class Contato 
+class Cidade 
     {
 
         public static function selecionaTodos()
@@ -18,7 +13,7 @@ Retorno dos dados.
 
           $conn =  Connection::getConn();  
 
-          $sql = "SELECT * FROM contato ORDER BY ID ASC";
+          $sql = "SELECT * FROM cidades ORDER BY cidades_id ASC";
           $sql = $conn->prepare($sql);
           $sql->execute();
 
@@ -28,7 +23,7 @@ Retorno dos dados.
           /* Retorno por meio de $row (objeto) é armazenado em resultado. 
           Retorno da consulta acima */
 
-          while ($row = $sql->fetchObject('Contato')) {
+          while ($row = $sql->fetchObject('Cidade')) {
 
             $resultado []  = $row; //$row->titulo, $row->conteudo
 
@@ -48,8 +43,7 @@ Retorno dos dados.
 
         }
 
+    }      
 
 
-    }
-
-?>
+?>        
